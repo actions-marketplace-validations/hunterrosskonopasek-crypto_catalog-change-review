@@ -14,7 +14,9 @@ For example, suppose the **BX-40** product page displays a card for **CX-40**. Y
 
 **$2,500 USD total, including any applicable tax, prepaid for 12 months** from delivery. One named legal entity may use the software internally for one storefront, run it as often as needed, modify its local copy for internal use and keep its reports. Renewal requires a new order. The end-client license excludes redistribution, sublicensing and resale. Additional storefronts or custom integrations require separate scope.
 
-[Download the blank license order (fillable PDF)](https://hunter-workflow-consulting.marinegnome.chatgpt.site/related-product-card-audit-license-order.pdf). Return the signed form privately in your HWC reply thread.
+**Direct checkout.** Enter the buyer’s legal entity, one storefront domain, your full name as its authorized representative, and the delivery email. By paying, you accept the [direct-checkout license agreement](./card-audit-direct-license.md) for the named entity. HWC sends the private software package within one business day after payment clears. [Buy the 12-month license for $2,500 at Stripe Checkout](https://buy.stripe.com/14A5kDazudh88fU4gHbZe0c).
+
+**Signed order.** [Download the blank license order (fillable PDF)](https://hunter-workflow-consulting.marinegnome.chatgpt.site/related-product-card-audit-license-order.pdf). Return the signed form privately in your HWC reply thread.
 
 [Request a license order from Hunter & Co. Workflow Consulting](https://form.jotform.com/263065301224041). In **What would you like help with?**, enter **Related Product Card Audit license** and include your legal entity, storefront URL and billing country and state or province. Keep your catalog files with your team. HWC confirms the scope and applicable tax, sends the written order and payment instructions privately, and delivers the package once payment clears.
 
