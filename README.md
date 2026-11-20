@@ -26,7 +26,7 @@ On a Linux runner with Python 3 and your repository already checked out, add thi
 
 ```yaml
 - name: Check catalog changes
-  uses: hunterrosskonopasek-crypto/catalog-change-review@v1.0.0
+  uses: hunterrosskonopasek-crypto/catalog-change-review@v1.0.1
   with:
     before: catalog/approved.csv
     after: catalog/proposed.csv
