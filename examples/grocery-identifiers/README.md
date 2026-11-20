@@ -2,6 +2,8 @@
 
 Two chocolate-chip entries list the same flavor, 5.1-ounce weight and six-bar count. Their identifiers differ. A distributor that merges these rows by description would lose a source identifier.
 
+![Five grocery rows showing three numeric identifiers and two source values held for supplier review](HWC-Grocery-Identifier-Review.png)
+
 [Download the five-row CSV](packaged-goods-identifier-sample.csv). Import the raw identifier and normalized GTIN columns as **text** to preserve leading zeroes.
 
 | Rows | Import decision |
