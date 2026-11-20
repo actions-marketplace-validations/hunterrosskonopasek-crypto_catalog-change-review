@@ -3,6 +3,8 @@
 
 Hunter & Co. Workflow Consulting LLC licenses this Python software to a distributor for one named legal entity and one catalog or storefront. The 12-month term starts when HWC delivers the package. Renewal requires a new order. There is no automatic renewal.
 
+[Buy the annual license for $2,500](https://buy.stripe.com/dRmdR9dLGcd49jY6oPbZe0b). Have the legal entity, catalog identifier, authorized signer name and delivery email ready.
+
 ## What the buyer receives
 
 The restricted download includes Python source code, two fictional CSV exports, a saved example report, operating instructions and regression tests. The software runs locally with Python 3.10 or newer using the standard library. The buyer supplies a dated observation export and an authorized reference matched to the same SKU, brand, MPN and attribute. A distributor selling unit needs a reference for that distributor's own order unit and pack level.
