@@ -1,0 +1,23 @@
+name: Verify catalog review
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the tested commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Compare example exports and exercise input errors
+        run: python3 -m unittest -v
+      - name: Run the packaged action on an unchanged catalog
+        uses: ./
+        with:
+          before: examples/before.csv
+          after: examples/before.csv
+      - name: Verify a changed catalog triggers review
+        shell: bash
+        run: |
+          status=0
+          python3 review.py --fail-on-change examples/before.csv examples/after.csv || status=$?
+          test "$status" = 1

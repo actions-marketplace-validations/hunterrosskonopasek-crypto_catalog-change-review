@@ -1,0 +1,22 @@
+name: HWC Catalog Change Review
+description: Compare two catalog CSV snapshots by exact SKU and report changed records for review.
+author: Hunter & Co. Workflow Consulting
+branding:
+  icon: check-square
+  color: blue
+inputs:
+  before:
+    description: Previous complete UTF-8 CSV in the checked-out workspace
+    required: true
+  after:
+    description: Proposed complete UTF-8 CSV in the same SKU namespace
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: Review catalog changes
+      shell: bash
+      env:
+        BEFORE_FILE: ${{ inputs.before }}
+        AFTER_FILE: ${{ inputs.after }}
+      run: python3 "$GITHUB_ACTION_PATH/review.py" --fail-on-change -- "$BEFORE_FILE" "$AFTER_FILE"

@@ -1,0 +1,97 @@
+"""Compare two complete UTF-8 catalog snapshots from the same SKU namespace."""
+import argparse
+import csv
+from collections import Counter, defaultdict
+from dataclasses import dataclass
+import json
+from pathlib import Path
+import sys
+
+
+@dataclass(frozen=True)
+class Record:
+    number: int
+    fields: tuple
+
+
+def read_snapshot(path, key, fields):
+    groups = defaultdict(list)
+    blanks = []
+    with path.open("r", encoding="utf-8-sig", newline="") as source:
+        rows = csv.reader(source, strict=True)
+        headers = next(rows, [])
+        if not headers or any(not h.strip() for h in headers) or len(set(headers)) != len(headers):
+            raise ValueError("Each file needs unique, nonblank column names.")
+        if any(name not in headers for name in (key, *fields)):
+            raise ValueError("A required column is missing from a snapshot.")
+        key_index = headers.index(key)
+        indices = [headers.index(name) for name in fields]
+        for number, row in enumerate(rows, 1):
+            if not row:
+                continue
+            if len(row) != len(headers):
+                raise ValueError(f"A row has the wrong column count at data record {number}.")
+            identifier = row[key_index]
+            if not identifier.strip():
+                blanks.append(number)
+            else:
+                groups[identifier].append(Record(number, tuple(row[i] for i in indices)))
+    return groups, blanks
+
+
+def compare(before, after, key="sku", fields=("selling_unit", "pack_qty")):
+    if not fields or len(set((key, *fields))) != 1 + len(fields):
+        raise ValueError("Choose one key and distinct fields other than the key.")
+    left, left_blanks = read_snapshot(before, key, fields)
+    right, right_blanks = read_snapshot(after, key, fields)
+    findings = []
+
+    def add(kind, old_rows, new_rows, changed=()):
+        findings.append(dict(reason=kind, before_records=old_rows, after_records=new_rows, changed_columns=list(changed)))
+
+    for number in left_blanks:
+        add("missing_key", [number], [])
+    for number in right_blanks:
+        add("missing_key", [], [number])
+    for identifier in dict.fromkeys((*left, *right)):
+        old = left.get(identifier, [])
+        new = right.get(identifier, [])
+        old_nums = [r.number for r in old]
+        new_nums = [r.number for r in new]
+        if len(old) > 1 or len(new) > 1:
+            add("ambiguous_key", old_nums, new_nums)
+        elif not old:
+            add("added", [], new_nums)
+        elif not new:
+            add("removed", old_nums, [])
+        elif old[0].fields != new[0].fields:
+            changed = [field for i, field in enumerate(fields) if old[0].fields[i] != new[0].fields[i]]
+            add("changed", old_nums, new_nums, changed)
+    return {
+        "before_records": sum(map(len, left.values())) + len(left_blanks),
+        "after_records": sum(map(len, right.values())) + len(right_blanks),
+        "counts": dict(sorted(Counter(f["reason"] for f in findings).items())),
+        "findings": findings,
+    }
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("before", type=Path)
+    parser.add_argument("after", type=Path)
+    parser.add_argument("--key", default="sku")
+    parser.add_argument("--field", action="append", help="Repeat for each compared column.")
+    parser.add_argument("--fail-on-change", action="store_true", help="Exit with status 1 for any finding.")
+    args = parser.parse_args(argv)
+    try:
+        report = compare(args.before, args.after, args.key, args.field or ("selling_unit", "pack_qty"))
+    except (OSError, UnicodeError, ValueError, csv.Error) as exc:
+        message = str(exc) if isinstance(exc, ValueError) and not isinstance(exc, UnicodeError) else "Could not read a valid UTF-8 CSV snapshot."
+        print(message, file=sys.stderr)
+        return 2
+    print(json.dumps(report, indent=2))
+    return int(args.fail_on_change and bool(report["findings"]))
+
+
+if __name__ == "__main__":
+    sys.exit(main())
