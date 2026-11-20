@@ -18,6 +18,8 @@ The example reports four review items. Before record 1 changes from six units pe
 
 [Five product identifiers from a grocery supplier table](examples/grocery-identifiers/README.md). Two six-bar packs share a description but carry different codes. The downloadable CSV shows which identifiers can be compared and which need supplier review.
 
+[Compare two industrial tool feeds](examples/industrial-diameters/README.md). Run the sample to see why a rounded diameter can be accepted while a change to drill-point geometry needs a source check.
+
 [Worked public-data example with USDA fruit catalogs](examples/usda-tefap/README.md). A comparison of 33 previous and 32 current rows separates packaging wording from an item missing in the new list.
 
 ## Use your exports
