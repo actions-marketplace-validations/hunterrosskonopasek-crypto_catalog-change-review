@@ -8,6 +8,8 @@ Catch a case-pack change before a distributor imports its next feed. This tool c
 
 [Audit related-product card descriptions](offers/related-product-card-audit.md) when a card points to one model and its teaser names another. The $2,500 annual internal license covers unlimited local runs for one storefront.
 
+[Compare industrial specifications and selling units](offers/broken-spec-missing-uom-auto-auditor.md) against your distributor reference files. The $2,500 annual license covers unlimited local audits of one catalog.
+
 ## Try the example
 
 [Download the v1.0.1 source ZIP](https://github.com/hunterrosskonopasek-crypto/catalog-change-review/archive/refs/tags/v1.0.1.zip), unzip it and open the folder that contains `review.py`. Run the example from that folder.
