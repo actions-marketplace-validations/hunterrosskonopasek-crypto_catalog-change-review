@@ -10,6 +10,8 @@ At checkout, enter your legal entity’s name, the storefront domain, your full 
 
 Within one business day after payment clears, HWC sends a restricted link to the software ZIP to the email address entered at checkout. The ZIP contains Python source, two fictional example CSVs, an example report, instructions and tests. Your prepaid 12-month term begins on digital delivery. To renew, place a new order. There is no automatic charge.
 
+[Buy the 12-month license for $2,500 at Stripe Checkout](https://buy.stripe.com/14A5kDazudh88fU4gHbZe0c)
+
 ## How you may use the software
 
 During the term, your entity may run unlimited offline audits of its named storefront, modify its local copy for its own internal use and retain the reports it produces. You may continue to use those reports after the term ends. HWC retains ownership of its software. The license prohibits redistribution outside the named entity, sublicensing and resale.
