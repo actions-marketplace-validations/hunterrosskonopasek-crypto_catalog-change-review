@@ -36,4 +36,10 @@ The action reports JSON and fails the step on any finding so a reviewer can deci
 
 Run the test suite with `python3 -m unittest -v`.
 
-[Try a catalog release decision with your team](https://hunter-workflow-consulting.marinegnome.chatgpt.site/catalog-release-rehearsal) or [discuss an HWC catalog diagnostic](https://hunter-workflow-consulting.marinegnome.chatgpt.site/enterprise-catalog). The MIT license applies to the files in this repository.
+## When a change needs a human decision
+
+If several people approve a feed, [try the two-lot packaging case](https://hunter-workflow-consulting.marinegnome.chatgpt.site/catalog-release-rehearsal) before choosing the [65-minute team rehearsal](https://hunterkonopasek.gumroad.com/l/catalog-release-rehearsal?utm_source=github&utm_medium=readme&utm_campaign=catalog_change_review&utm_content=team_rehearsal). The $1,000 kit includes 18 cases and scorecards for one internal team of up to 12.
+
+If you operate an agency and have an upcoming client handoff, [ask about the $1,250 white-label QA trial](https://form.jotform.com/263065301224041?q4_textarea2=I%20found%20HWC%20through%20the%20GitHub%20catalog-change-review%20tool.%20I%20would%20like%20to%20discuss%20the%20%241%2C250%20white-label%20catalog%20QA%20trial%20for%20one%20authorized%20merchant%20feed%2C%20up%20to%20100%20source%20rows%20and%2012%20manual%20cases.%20Product%20family%2C%20approximate%20row%20count%20and%20desired%20review%20date%3A%20). It covers one authorized feed, one pack-count field, up to 100 source rows and 12 manual cases. To start, send the product family, approximate row count and review date. Keep the client export with you until both sides agree on scope and data sharing.
+
+The MIT license applies to this repository's original code. The USDA tables used in the public-data example are attributed alongside the extracts.
