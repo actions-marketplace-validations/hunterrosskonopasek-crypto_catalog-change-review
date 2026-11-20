@@ -12,6 +12,8 @@ For example, suppose the **BX-40** product page displays a card for **CX-40**. Y
 
 ## License and ordering
 
-**$2,500 USD prepaid for 12 months** from delivery. One named legal entity may use the software internally for one storefront, run it as often as needed, modify its local copy for internal use and keep its reports. Renewal requires a new order. Redistribution, sublicensing and resale are excluded. Additional storefronts or custom integrations require separate scope.
+**$2,500 USD total, including any applicable tax, prepaid for 12 months** from delivery. One named legal entity may use the software internally for one storefront, run it as often as needed, modify its local copy for internal use and keep its reports. Renewal requires a new order. Redistribution, sublicensing and resale are excluded. Additional storefronts or custom integrations require separate scope.
+
+[Download the blank license order (fillable PDF)](https://hunter-workflow-consulting.marinegnome.chatgpt.site/related-product-card-audit-license-order.pdf). Return the signed form privately in your HWC reply thread.
 
 [Request a license order from Hunter & Co. Workflow Consulting](https://form.jotform.com/263065301224041). In **What would you like help with?**, enter **Related Product Card Audit license** and include your legal entity, storefront URL and billing country and state or province. Keep your catalog files with your team. HWC confirms the scope and applicable tax, sends the written order and payment instructions privately, and delivers the package once payment clears.
