@@ -6,6 +6,8 @@ Catch a case-pack change before a distributor imports its next feed. This tool c
 
 [Request scope and availability for the $1,250 white-label QA trial](https://form.jotform.com/263065301224041?q4_textarea2=I%20found%20HWC%20through%20the%20GitHub%20catalog-change-review%20tool.%20I%20would%20like%20to%20discuss%20the%20%241%2C250%20white-label%20catalog%20QA%20trial%20for%20one%20authorized%20merchant%20feed%2C%20up%20to%20100%20source%20rows%20and%2012%20manual%20cases.%20Product%20family%2C%20approximate%20row%20count%20and%20desired%20review%20date%3A%20). It covers one authorized merchant feed, one pack-count field, up to 100 source rows, 12 manual cases and one correction round. The form asks for the product family, approximate row count and review date. Share the export once both parties agree on scope and data sharing.
 
+Have a small catalog sample? [Check up to 25 SKUs in your browser](https://hunter-workflow-consulting.marinegnome.chatgpt.site/free-25-sku-diagnostic?utm_source=github&utm_medium=readme&utm_campaign=catalog_change_review) to flag specification links, selling units and related-card model numbers for review. The CSV stays on your device.
+
 [Audit related-product card descriptions](offers/related-product-card-audit.md) when a card points to one model and its teaser names another. The $2,500 annual internal license covers unlimited local runs for one storefront.
 
 [Compare industrial specifications and selling units](offers/broken-spec-missing-uom-auto-auditor.md) against your distributor reference files. The $2,500 annual license covers unlimited local audits of one catalog.
