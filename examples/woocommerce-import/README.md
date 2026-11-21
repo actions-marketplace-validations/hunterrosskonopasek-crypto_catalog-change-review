@@ -2,7 +2,7 @@
 
 A merchant expects black, blue and green tray variations. An agency has prepared a replacement import. These two fictional exports each contain six records. The record counts agree, but one color disappears, a different SKU appears twice and the unit on a surviving variation changes.
 
-Download the [source family](source-family.csv) and [proposed import](proposed-import.csv). From the repository root, run the comparison with the actual WooCommerce header names.
+Download [the runnable example ZIP](https://codeload.github.com/hunterrosskonopasek-crypto/catalog-change-review/zip/9c8579bf1d57c49e58749821d904039d670dacb9) and extract it. It includes the comparison tool, [source family](source-family.csv) and [proposed import](proposed-import.csv). From the extracted repository folder, run the comparison with the actual WooCommerce header names.
 
 ```sh
 python3 review.py examples/woocommerce-import/source-family.csv examples/woocommerce-import/proposed-import.csv --key SKU --field Type
