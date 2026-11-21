@@ -12,6 +12,8 @@ Have a small catalog sample? [Check up to 25 SKUs in your browser](https://hunte
 
 [Compare industrial specifications and selling units](offers/broken-spec-missing-uom-auto-auditor.md) against your distributor reference files. The $2,500 annual license covers unlimited local audits of one catalog.
 
+Working with an Akeneo import? [Check incoming identifiers against an existing PIM export](https://hunter-workflow-consulting.marinegnome.chatgpt.site/akeneo-identifier-check?utm_source=github&utm_medium=readme&utm_campaign=catalog_change_review). Both files stay in your browser. The six-row example shows how a case change can update an existing product.
+
 ## Try the example
 
 [Download the v1.0.1 source ZIP](https://github.com/hunterrosskonopasek-crypto/catalog-change-review/archive/refs/tags/v1.0.1.zip), unzip it and open the folder that contains `review.py`. Run the example from that folder.
