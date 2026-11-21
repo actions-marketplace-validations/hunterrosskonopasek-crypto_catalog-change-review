@@ -14,6 +14,8 @@ Have a small catalog sample? [Check up to 25 SKUs in your browser](https://hunte
 
 Working with an Akeneo import? [Check incoming identifiers against an existing PIM export](https://hunter-workflow-consulting.marinegnome.chatgpt.site/akeneo-identifier-check?utm_source=github&utm_medium=readme&utm_campaign=catalog_change_review). Both files stay in your browser. The six-row example shows how a case change can update an existing product.
 
+Preparing a WooCommerce import? [Run a six-row variation and duplicate-SKU example](examples/woocommerce-import/README.md). Compare two fictional exports, then inspect the selling-unit mismatch in the [worked $750 migration QA pilot](https://hunter-workflow-consulting.marinegnome.chatgpt.site/shopify-plus-pim-agency-partner-program?utm_source=github&utm_medium=marketplace&utm_campaign=woocommerce_import_qa#woocommerce-migration-qa). HWC can review one authorized product family before the agency imports it.
+
 ## Try the example
 
 [Download the v1.0.1 source ZIP](https://github.com/hunterrosskonopasek-crypto/catalog-change-review/archive/refs/tags/v1.0.1.zip), unzip it and open the folder that contains `review.py`. Run the example from that folder.
