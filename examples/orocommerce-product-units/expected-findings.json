@@ -1,0 +1,57 @@
+{
+  "before_records": 5,
+  "after_records": 5,
+  "counts": {
+    "changed": 4
+  },
+  "findings": [
+    {
+      "reason": "changed",
+      "before_records": [
+        1
+      ],
+      "after_records": [
+        1
+      ],
+      "changed_columns": [
+        "additionalUnitPrecisions:0:conversionRate"
+      ]
+    },
+    {
+      "reason": "changed",
+      "before_records": [
+        2
+      ],
+      "after_records": [
+        2
+      ],
+      "changed_columns": [
+        "primaryUnitPrecision.sell"
+      ]
+    },
+    {
+      "reason": "changed",
+      "before_records": [
+        3
+      ],
+      "after_records": [
+        3
+      ],
+      "changed_columns": [
+        "additionalUnitPrecisions:0:precision"
+      ]
+    },
+    {
+      "reason": "changed",
+      "before_records": [
+        4
+      ],
+      "after_records": [
+        4
+      ],
+      "changed_columns": [
+        "additionalUnitPrecisions:0:conversionRate"
+      ]
+    }
+  ]
+}

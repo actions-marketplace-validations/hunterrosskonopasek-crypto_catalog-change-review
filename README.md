@@ -32,6 +32,8 @@ The example reports four review items. Before record 1 changes from six units pe
 
 [Check wire prices quoted per foot, roll or 1,000 feet](examples/wire-price-basis/README.md). The editable worksheet reconciles a public bid’s price for a 500-foot roll and can be used with your own quotes.
 
+[Check an OroCommerce product import](examples/orocommerce-product-units/README.md) to see how a changed carton conversion can double the cost of 120 labels with every price-list row unchanged.
+
 [Review a university hosted price catalog](examples/university-hosted-catalog/README.md) to distinguish an agreed price increase from a change in pack size or an unknown pack count.
 
 [Compare two industrial tool feeds](examples/industrial-diameters/README.md). Run the sample to see why a rounded diameter can be accepted while a change to drill-point geometry needs a source check.
