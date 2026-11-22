@@ -23,7 +23,7 @@ Download and extract the [current project ZIP](https://github.com/hunterrosskono
 python3 examples/znode-bundle-associations/preflight.py
 ~~~
 
-The command reads the [seven-product snapshot](products.csv), the [kit owner’s approved bill](approved-bom.csv) and the [proposed relationships](proposed.csv). It writes a CSV to standard output. To save your own worksheet, append `> my-review.csv`. Import the SKU columns as **text** when opening CSVs in Excel to retain the leading zeros.
+The command reads the [seven-product snapshot](products.csv), the [kit owner’s approved bill](approved-bom.csv) and the [proposed relationships](proposed.csv). It writes a CSV to standard output. To save your own worksheet, append `--output my-review.csv`. This creates a new UTF-8 CSV for Excel and preserves any existing file at that path. Import the SKU columns as **text** when opening CSVs in Excel to retain the leading zeros.
 
 Try changing the proposed GSK-004 quantity from 2 to 4 in a copy of the proposal. That row should switch to MATCH, leaving five rows for review.
 
@@ -32,6 +32,17 @@ python3 examples/znode-bundle-associations/preflight.py --proposed my-proposed.c
 ~~~
 
 You can also supply separate UTF-8 files with `--products` and `--bom`. Use the example headers. The reference product file needs unique SKUs, and the approved bill needs a unique parent/child pair per row. Use the `BundleProduct` and `SimpleProduct` product type codes shown in the example. Keep one SKU namespace and use the same kit revision. A missing SKU means the supplied snapshot did not establish the relationship. The component might already exist in a larger catalog.
+
+## Check the complete bill or named kits
+
+Choose the coverage that the kit owner agreed to. The default reviews proposed lines only. Add `--whole-bill` to check every approved component against the proposed import. For a partial release, repeat `--kit PARENT_SKU` for the named kits. A parent with no approved lines needs an agreed reference before the comparison can run.
+
+~~~sh
+python3 examples/znode-bundle-associations/preflight.py --whole-bill
+python3 examples/znode-bundle-associations/preflight.py --kit KIT-710 --proposed my-proposed.csv
+~~~
+
+For example, remove the `KIT-710,00017` line from a copy of the proposal. In named-kit mode the report flags the omitted component, preserves its approved quantity of one and cites approved data record 3. The proposal record and proposed quantity stay blank because no such row was supplied. Headers occupy a separate line from the numbered data records. An entirely absent kit is checked if it is in scope. Duplicate lines remain ambiguous. A component with a changed identifier may yield both an extra proposed pair and an omitted approved pair for the owner to reconcile.
 
 ## Compare component units
 
@@ -45,7 +56,7 @@ If either file supplies a unit column, the report appends `proposed_uom` and `ap
 
 Znode V10 documents one Product Association Import row per relationship. Both SKUs must exist. The file includes display order and a default indicator, and bundled products require component quantity. Review the current template exported from your own environment. [Znode V10 bulk import documentation, Product Association Import](https://support.znode.com/support/solutions/articles/43000757074-bulk-importing-and-updating-data)
 
-This HWC check uses the published field names and adds two independent checks against the kit owner’s bill: proposed quantities and repeated parent/child pairs. Each MATCH applies only to the proposed row and the two files provided. An omitted component stays outside this row-by-row review. The worksheet does not determine which component should be the default or predict an import result. The script runs offline and has no connection to Znode. All SKUs, quantities and relationships here are fictional.
+This HWC check uses the published field names and adds two independent checks against the kit owner’s bill: proposed quantities and repeated parent/child pairs. Each MATCH applies only to the proposed row and the two files provided. Use the complete-bill or named-kit mode above when coverage of omitted components is part of the signed work. The worksheet does not determine which component should be the default or predict an import result. The script runs offline and has no connection to Znode. All SKUs, quantities and relationships here are fictional.
 
 ## Scope a distributor pilot
 
