@@ -1,0 +1,6 @@
+sku,description,selling_unit,pack_qty,price_usd
+LBL-010,Blank specimen label,CS,1000,120.00
+BOX-020,Freezer storage box,EA,1,4.40
+VIAL-030,Empty sample vial,BX,80,24.00
+DIV-040,Blank storage divider,CS,,18.00
+TAG-050,Blank inventory tag,BX,,9.00

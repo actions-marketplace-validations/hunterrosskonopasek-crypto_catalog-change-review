@@ -32,6 +32,8 @@ The example reports four review items. Before record 1 changes from six units pe
 
 [Check wire prices quoted per foot, roll or 1,000 feet](examples/wire-price-basis/README.md). The editable worksheet reconciles a public bid’s price for a 500-foot roll and can be used with your own quotes.
 
+[Review a university hosted price catalog](examples/university-hosted-catalog/README.md) to distinguish an agreed price increase from a change in pack size or an unknown pack count.
+
 [Compare two industrial tool feeds](examples/industrial-diameters/README.md). Run the sample to see why a rounded diameter can be accepted while a change to drill-point geometry needs a source check.
 
 [Worked public-data example with USDA fruit catalogs](examples/usda-tefap/README.md). A comparison of 33 previous and 32 current rows separates packaging wording from an item missing in the new list.
