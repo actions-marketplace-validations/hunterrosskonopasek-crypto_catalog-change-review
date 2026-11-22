@@ -1,6 +1,6 @@
 # Check an Akeneo import for identifier collisions
 
-[Run the browser check](https://hunter-workflow-consulting.marinegnome.chatgpt.site/akeneo-identifier-check?utm_source=github&utm_medium=readme&utm_campaign=catalog_change_review). Choose a proposed product CSV and, optionally, a current product export from the same PIM. Select the delimiter and identifier column used in both files. Each file can contain up to 5 MiB.
+[Run the browser check](https://hunterworkflowconsulting.com/akeneo-identifier-check?utm_source=github&utm_medium=readme&utm_campaign=catalog_change_review). Choose a proposed product CSV and, optionally, a current product export from the same PIM. Select the delimiter and identifier column used in both files. Each file can contain up to 5 MiB.
 
 Akeneo documents case-insensitive identifier matching. A supplier's `BX-17` can update a product that the merchant calls `bx-17`. The tool lists the proposed and existing records involved so the owner can check the source before import. It also flags blank keys, repeated keys, edge whitespace and identifiers requiring review beyond ASCII. [Akeneo import guide](https://help.akeneo.com/import-your-data)
 
