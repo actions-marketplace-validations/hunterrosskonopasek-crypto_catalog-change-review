@@ -1,0 +1,6 @@
+sku,source,order_unit,each_per_order_unit,agreed_price_usd
+LBL-010,Fictional university price schedule A,BX,100,12.00
+BOX-020,Fictional signed amendment B effective for the proposed catalog,EA,1,4.40
+VIAL-030,Fictional university price schedule A,BX,100,24.00
+DIV-040,Fictional university price schedule A,CS,200,18.00
+TAG-050,Fictional price sheet with no pack count,BX,,9.00

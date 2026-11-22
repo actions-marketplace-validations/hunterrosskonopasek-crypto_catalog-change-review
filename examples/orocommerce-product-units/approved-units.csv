@@ -1,0 +1,6 @@
+sku,primaryUnitPrecision.unit.code,primaryUnitPrecision.precision,primaryUnitPrecision.conversionRate,primaryUnitPrecision.sell,additionalUnitPrecisions:0:unit:code,additionalUnitPrecisions:0:precision,additionalUnitPrecisions:0:conversionRate,additionalUnitPrecisions:0:sell
+LABEL-24,item,0,1,1,set,0,24,1
+CLIP-12,item,0,1,1,set,0,12,1
+CAP-06,item,0,1,1,set,0,6,1
+RING-08,item,0,1,1,set,0,8,1
+TRAY-04,item,0,1,1,set,0,4,1

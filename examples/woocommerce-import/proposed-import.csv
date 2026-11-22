@@ -1,0 +1,7 @@
+ID,Type,SKU,Parent,Meta: selling_unit
+900,variable,TRAY-100,,
+901,variation,TRAY-BLACK,TRAY-100,EACH
+902,variation,TRAY-BLUE,id:900,EACH
+904,simple,CLIP-10,,BAG
+905,simple,CLIP-10,,BAG
+906,simple,000042,,EACH

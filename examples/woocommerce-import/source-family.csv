@@ -1,0 +1,7 @@
+ID,Type,SKU,Parent,Selling unit
+100,variable,TRAY-100,,
+101,variation,TRAY-BLACK,id:100,EACH
+102,variation,TRAY-BLUE,TRAY-100,CASE
+103,variation,TRAY-GREEN,TRAY-100,EACH
+104,simple,CLIP-10,,BAG
+105,simple,000042,,EACH

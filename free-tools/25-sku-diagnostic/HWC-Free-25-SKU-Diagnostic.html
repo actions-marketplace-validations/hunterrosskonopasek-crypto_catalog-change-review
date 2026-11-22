@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-8NFR1HMe7C9hLcYEiQWDUnFKfE8Z6h22b2+ZaCjKszE='; style-src 'sha256-xKii1Hnk4PSe/Y5W2Xn1Hs4s9BuovEEZEpix3pOCes0='; connect-src 'none'; form-action 'none'; base-uri 'none'; object-src 'none'">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>Free 25-SKU diagnostic · HWC offline edition</title>
+<style>
+:root {color-scheme: light; font-family: system-ui, sans-serif; color: #172f2c; background: #f5f6f0; line-height: 1.55}
+* {box-sizing:border-box}
+body {margin:0}
+header, main, footer {max-width:54rem; margin:auto; padding:1.3rem clamp(1rem,4vw,2.4rem)}
+header {border-bottom:1px solid #bbc9bd; color:#234b3d; font-weight:650}
+h1, h2 {font-family: Georgia, serif; font-weight:normal; line-height:1.15}
+h1 {font-size:clamp(2.25rem,6vw,3.7rem); letter-spacing:-.035em; margin:.15em 0}
+h2 {font-size:1.7rem; margin:0 0 .55rem}
+main > p {max-width:62ch; font-size:1.06rem}
+.check-panel {margin:1.5rem 0; padding:clamp(1rem,3vw,1.8rem); background:white; border:1px solid #c8d2c8; border-top:3px solid #35634e; border-radius:.4rem}
+label {display:block; font-weight:600; margin:.6rem 0 .25rem}
+input, select, button {max-width:100%; font:inherit}
+button, select, input::file-selector-button {border:1px solid #677e6e; border-radius:.25rem; padding:.4rem .75rem; background:white; color:#204a38}
+input::file-selector-button, button, summary {cursor:pointer}
+#download-report {background:#25533d; color:white}
+a {color:#205941; text-underline-offset:.15em}
+:focus-visible {outline:3px solid #2777a1; outline-offset:3px}
+.aux-actions {display:flex; flex-wrap:wrap; gap:.55rem 1rem; align-items:center; margin:1rem 0}
+.selections {display:grid; gap:.4rem 1rem; grid-template-columns:repeat(auto-fit,minmax(min(15rem,100%),1fr))}
+.selections select {width:100%}
+#sample-status, #finding-count {font-weight:650}
+li {margin:.55rem 0}
+code {overflow-wrap:anywhere}
+footer {font-size:.87rem; color:#496156}
+details {margin:.8rem 0}
+.skip {position:absolute; left:-10000px}
+.skip:focus {left:.5rem; background:white; padding:.4rem}
+</style>
+</head><body>
+<!--
+Offline edition of Hunter & Co. Workflow Consulting’s public Free 25-SKU diagnostic.
+Adapted from HWC’s first-party browser diagnostic, CSV parser and sample template.
+This notice applies to this distributed offline edition.
+
+MIT License
+
+Copyright (c) 2026 Hunter & Co. Workflow Consulting
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+-->
+<a class="skip" href="#main">Skip to diagnostic</a>
+<header>Hunter &amp; Co. Workflow Consulting</header>
+<main id="main"><h1>Free 25-SKU diagnostic</h1>
+<p>Open a catalog CSV to see which records need review before import. This offline edition runs in your browser and lets you save a text summary or a CSV worksheet with source values for review.</p>
+<section class="check-panel" aria-labelledby="sample-heading">
+<h2 id="sample-heading">Check your sample</h2>
+<p id="file-help">Use a UTF-8 CSV with a header and 1–25 data rows, up to 512 KiB. Your file and report stay on this device, even when you are connected to the internet.</p>
+<label for="sample-file">Catalog CSV</label><input id="sample-file" type="file" accept=".csv,text/csv" aria-describedby="file-help">
+<div class="aux-actions"><button type="button" class="quiet" id="try-example">Try a fictional sample</button> <a href="data:text/csv;charset=utf-8;base64,c2t1LGd0aW4sdW9tLHNwZWNfdXJsLGNhcmRfbXBuLGRlc3RpbmF0aW9uX21wbgowMDEsMDM2MDAwMjkxNDUyLEVBLGh0dHBzOi8vZXhhbXBsZS5jb20vdmFsdmUucGRmLFYtMTAsVi0xMAowMDIsMDM2MDAwMjkxNDUzLCxzcGVjLnBkZixWLTIwLFYtMjUKMDAyLDk2Mzg1MDc0LFBLLGh0dHBzOi8vZXhhbXBsZS5jb20vZWxib3cucGRmLEUtMzAsRS0zMAo=" download="HWC-25-SKU-template.csv">Download the CSV template</a></div>
+<details><summary>Which columns can I include?</summary><p>Include a SKU column. After loading, use “Match optional columns” to choose the barcode, selling unit, specification link and part-number fields from your export. The template uses <code>gtin</code>, <code>uom</code>, <code>spec_url</code>, <code>card_mpn</code> and <code>destination_mpn</code>. Use the last two together for the part number displayed on a related-item card and the part number at its link destination. A blank pair means this row has no card comparison.</p></details>
+<div id="column-mapping" hidden><label for="sample-sku">SKU column</label><select id="sample-sku"></select> <button type="button" class="quiet" id="clear-sample">Clear sample</button>
+<details id="optional-mapping"><summary>Match optional columns</summary>
+<p>Choose the column your export uses for each field. Leave a field on “Skip this field” if your file omits it. The card comparison needs both part numbers.</p>
+<div class="selections">
+<div><label for="sample-gtin">Barcode (GTIN, UPC or EAN)</label><select id="sample-gtin"></select></div>
+<div><label for="sample-uom">Selling unit</label><select id="sample-uom"></select></div>
+<div><label for="sample-spec">Specification link</label><select id="sample-spec"></select></div>
+<div><label for="sample-card">Part number on the related card</label><select id="sample-card"></select></div>
+<div><label for="sample-target">Part number at the destination</label><select id="sample-target"></select></div>
+</div></details></div>
+<p id="sample-status" role="status" aria-live="polite"></p><noscript><p>Enable JavaScript to run the diagnostic on this device.</p></noscript>
+</section>
+<section id="sample-results" class="check-panel result-panel" aria-labelledby="report-heading" hidden>
+<h2 id="report-heading">Your sample report</h2><p id="finding-count"></p><p><strong>Checks run</strong><br><span id="checks-run"></span></p><p id="skipped-checks"></p>
+<ol id="findings"></ol><p>Record 1 is the first data row. A flag calls for source review. The link check inspects the address format. Confirming that a document opens and belongs to the item requires a separate review.</p>
+<button type="button" class="quiet" id="download-report">Download report (.txt)</button>
+<button type="button" class="quiet" id="download-review">Download review worksheet (.csv)</button>
+<p>The worksheet includes source values and one row per finding. Assign a reviewer and record the approved change. Import SKU and value columns as text to retain leading zeros. With no findings, the worksheet contains only the headings.</p>
+</section></main>
+<footer>Hunter &amp; Co. Workflow Consulting · Offline edition</footer>
+<script>
+'use strict';
+
+function parseCatalog(text, rowLimit = 25) {
+  if (text.includes('\0')) throw new Error('Export a UTF-8 CSV. This file contains a NUL character.');
+  text = text.replace(/^\uFEFF/, '');
+  const rows = [];
+  let row = [], field = '', quoted = false, closed = false;
+  let cells = 0;
+  function finishField() {
+    row.push(field);
+    field = '';
+    closed = false;
+    cells++;
+    if (row.length > 128 || cells > 500000) throw new Error('Use an export with up to 128 columns and 500,000 cells.');
+  }
+  function finishRow() {
+    finishField();
+    if (rows.length && row.length !== rows[0].length) {
+      throw new Error('Data record ' + rows.length + ' has a different number of columns from its header.');
+    }
+    rows.push(row);
+    row = [];
+    if (rows.length > rowLimit + 1) throw new Error('Use a sample of up to ' + rowLimit.toLocaleString('en-US') + ' data records.');
+  }
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (quoted) {
+      if (c !== '"') field += c;
+      else if (text[i + 1] === '"') { field += '"'; i++; }
+      else { quoted = false; closed = true; }
+    } else if (c === ',') finishField();
+    else if (c === '\r' || c === '\n') {
+      finishRow();
+      if (c === '\r' && text[i + 1] === '\n') i++;
+    } else if (c === '"' && field === '' && !closed) quoted = true;
+    else if (c === '"' || closed) throw new Error('Unexpected quotation mark or text after a quoted field in record ' + (rows.length + 1) + '.');
+    else field += c;
+  }
+  if (quoted) throw new Error('The final quoted field is incomplete.');
+  if (row.length || field.length || closed) finishRow();
+  const headers = rows.shift();
+  if (!headers || !rows.length) throw new Error('Include a header and at least one data record.');
+  if (headers.some(h => !h.trim()) || new Set(headers.map(h => h.trim())).size !== headers.length) {
+    throw new Error('Give each column a distinct, nonblank heading.');
+  }
+  return {headers, rows};
+}
+
+function gtinIssue(value) {
+  if (!value.trim()) return 'Missing GTIN';
+  if (!/^(?:\d{8}|\d{12}|\d{13}|\d{14})$/.test(value)) return 'GTIN length or characters';
+  let sum = 0, weight = 3;
+  for (let i = value.length - 2; i >= 0; i--) {
+    sum += Number(value[i]) * weight;
+    weight = 4 - weight;
+  }
+  if (Number(value.at(-1)) !== (10 - sum % 10) % 10) return 'GTIN check digit';
+  if (/^0+$/.test(value)) return 'All-zero GTIN';
+  return '';
+}
+
+function checkCatalog(data, skuColumn, gtinColumn = -1) {
+  const {headers, rows} = data;
+  const validColumn = index => Number.isInteger(index) && index >= 0 && index < headers.length;
+  if (!validColumn(skuColumn) || (gtinColumn !== -1 && !validColumn(gtinColumn)) || gtinColumn === skuColumn) {
+    throw new Error('Choose a SKU column and, optionally, a different GTIN column.');
+  }
+  const frequency = new Map();
+  for (const row of rows) {
+    const sku = row[skuColumn];
+    if (sku.trim()) frequency.set(sku, (frequency.get(sku) || 0) + 1);
+  }
+  const flags = [];
+  let missingSku = 0, repeatedSku = 0, gtinRows = 0;
+  rows.forEach((row, index) => {
+    const reasons = [];
+    const sku = row[skuColumn];
+    if (!sku.trim()) { missingSku++; reasons.push('Missing SKU'); }
+    else if (frequency.get(sku) > 1) { repeatedSku++; reasons.push('Repeated exact SKU'); }
+    if (gtinColumn !== -1) {
+      const issue = gtinIssue(row[gtinColumn]);
+      if (issue) { gtinRows++; reasons.push(issue); }
+    }
+    if (reasons.length) flags.push({record: index + 1, reasons});
+  });
+  return {total: rows.length, flagged: flags.length, missingSku, repeatedSku, gtinRows: gtinColumn === -1 ? null : gtinRows, flags};
+}
+
+const fieldNames = {
+  sku: ['sku', 'seller sku', 'item number', 'stock keeping unit', 'item id', 'variant sku'],
+  gtin: ['gtin', 'upc', 'ean', 'barcode', 'variant barcode'],
+  uom: ['uom', 'unit of measure', 'selling unit', 'meta: selling unit'],
+  spec: ['spec url', 'spec sheet url', 'datasheet url', 'specification url'],
+  card: ['card mpn', 'card model', 'related card mpn'],
+  target: ['destination mpn', 'destination model', 'target mpn']
+};
+const checkLabels = {
+  sku: 'Missing and repeated SKUs', gtin: 'GTIN format and check digit',
+  uom: 'Missing selling unit', spec: 'Missing or malformed specification links',
+  pair: 'Card and destination part-number comparison'
+};
+const advice = {
+  'Missing SKU': 'Find the selling identifier in your item master.',
+  'Repeated exact SKU': 'Check whether these rows describe different packs or variants.',
+  'Missing selling unit': 'Confirm the sellable unit against the source record.',
+  'Missing specification link': 'Add the approved manufacturer document link.',
+  'Malformed specification link': 'Check that the export contains a complete HTTP or HTTPS address.',
+  'Card and destination MPNs differ': 'Compare both part numbers against the intended linked item.',
+  'Incomplete card comparison': 'Supply both part numbers for this related-item relationship.'
+};
+const ambiguousColumn = -2;
+function column(headers, key) {
+  const normal = s => s.trim().toLowerCase().replace(/[_-]+/g, ' ').replace(/\s+/g, ' ');
+  let match = -1;
+  for (const [index, heading] of headers.entries()) {
+    if (!fieldNames[key].includes(normal(heading))) continue;
+    if (match >= 0) return ambiguousColumn;
+    match = index;
+  }
+  return match;
+}
+function usableSpec(value) {
+  if (!/^https?:\/\//i.test(value) || /\s/.test(value)) return false;
+  try { return Boolean(new URL(value).hostname); } catch { return false; }
+}
+function diagnose(data, sku, mapping) {
+  if (sku === ambiguousColumn) throw new Error('More than one column matches the selling SKU. Choose the SKU column to check.');
+  const cols = {};
+  const used = new Set([sku]);
+  for (const key of Object.keys(fieldNames)) {
+    if (key === 'sku') continue;
+    let index = mapping ? mapping[key] : column(data.headers, key);
+    if (index === undefined || (!mapping && index === sku)) index = -1;
+    if (index === ambiguousColumn) {
+      throw new Error('More than one column matches ' + fieldNames[key][0] + '. Choose the intended column or “Skip this field”.');
+    }
+    if (!Number.isInteger(index) || index < -1 || index >= data.headers.length) {
+      throw new Error('Choose a column from this file for each field.');
+    }
+    if (index >= 0) {
+      if (used.has(index)) throw new Error('Each field needs a different CSV column. Change the repeated selection or choose “Skip this field”.');
+      used.add(index);
+    }
+    cols[key] = index;
+  }
+  const base = checkCatalog(data, sku, cols.gtin);
+  const reasons = new Map(base.flags.map(f => [f.record, [...f.reasons]]));
+  const checks = ['sku'];
+  for (const key of ['gtin', 'uom', 'spec']) if (cols[key] >= 0) checks.push(key);
+  const checkPair = cols.card >= 0 && cols.target >= 0;
+  if (checkPair) checks.push('pair');
+  data.rows.forEach((row, index) => {
+    const flags = reasons.get(index + 1) || [];
+    if (cols.uom >= 0 && !row[cols.uom].trim()) flags.push('Missing selling unit');
+    if (cols.spec >= 0) {
+      const spec = row[cols.spec].trim();
+      if (!spec) flags.push('Missing specification link');
+      else if (!usableSpec(spec)) flags.push('Malformed specification link');
+    }
+    if (checkPair) {
+      const a = row[cols.card].trim(), b = row[cols.target].trim();
+      if (Boolean(a) !== Boolean(b)) flags.push('Incomplete card comparison');
+      if (a && b && a !== b) flags.push('Card and destination MPNs differ');
+    }
+    if (flags.length) reasons.set(index + 1, flags);
+  });
+  const items = [...reasons].sort(([a], [b]) => a - b).flatMap(([record, flags]) =>
+    flags.map(reason => ({record, reason, action: advice[reason] || 'Verify the barcode against the manufacturer record for this pack.'})));
+  return {rows: base.total, flagged: reasons.size, items, checks};
+}
+function summary(r) {
+  const count = (n, name) => n + ' ' + name + (n === 1 ? '' : 's');
+  return r.flagged + ' of ' + count(r.rows, 'row') + ' flagged. ' + count(r.items.length, 'finding') +
+    ' across ' + count(r.checks.length, 'check') + '.';
+}
+function formatReport(r, fictional = false) {
+  const skipped = Object.keys(checkLabels).filter(key => !r.checks.includes(key));
+  const title = fictional ? 'HWC | Fictional example | Free 25-SKU diagnostic' : 'HWC | Free 25-SKU diagnostic';
+  return [title, summary(r),
+    'Checked: ' + r.checks.map(key => checkLabels[key]).join('; '),
+    'Skipped: ' + (skipped.map(key => checkLabels[key]).join('; ') || 'none'),
+    'Record 1 is the first data row. Verify findings against your approved source before publishing.',
+    'This screen checks supplied fields only. Link availability and manufacturer documents require separate verification.', '',
+    ...(r.items.length ? r.items.map(x => 'Record ' + x.record + ' | ' + x.reason + ' | ' + x.action) : ['No flags under the checks listed above.'])
+  ].join('\r\n') + '\r\n';
+}
+function formatReviewCsv(result, data, sku, mapping) {
+  const columnsByReason = {
+    'Missing SKU': [sku], 'Repeated exact SKU': [sku],
+    'Missing selling unit': [mapping.uom],
+    'Missing specification link': [mapping.spec], 'Malformed specification link': [mapping.spec],
+    'Card and destination MPNs differ': [mapping.card, mapping.target],
+    'Incomplete card comparison': [mapping.card, mapping.target]
+  };
+  const lines = [['Source record', 'Selling SKU', 'Finding', 'Source column', 'Source value',
+    'Comparison column', 'Comparison value', 'Suggested check', 'Reviewer', 'Decision', 'Approved value']];
+  for (const finding of result.items) {
+    const row = data.rows[finding.record - 1];
+    const [first, second] = columnsByReason[finding.reason] || [mapping.gtin];
+    lines.push([finding.record, row[sku], finding.reason, data.headers[first], row[first],
+      second === undefined ? '' : data.headers[second], second === undefined ? '' : row[second],
+      finding.action, '', '', '']);
+  }
+  function spreadsheetCell(value) {
+    let text = String(value);
+    if (/^[\s\u0000-\u001f]*[=+@\-＝＋＠－]|^[\t\r\n]/u.test(text)) text = "'" + text;
+    return '"' + text.replaceAll('"', '""') + '"';
+  }
+  return lines.map(row => row.map(spreadsheetCell).join(',')).join('\r\n') + '\r\n';
+}
+function startFreeDiagnostic() {
+  const el = id => document.getElementById(id);
+  const input = el('sample-file'), select = el('sample-sku'), status = el('sample-status');
+  const optional = Object.fromEntries(Object.keys(fieldNames).filter(key => key !== 'sku')
+    .map(key => [key, el('sample-' + key)]));
+  let data = null, result = null, revision = 0, isExample = false;
+  function reset() {
+    revision++;
+    isExample = false;
+    data = null;
+    result = null;
+    status.textContent = '';
+    select.replaceChildren();
+    for (const field of Object.values(optional)) field.replaceChildren();
+    el('optional-mapping').open = false;
+    el('column-mapping').hidden = true;
+    el('sample-results').hidden = true;
+    el('findings').replaceChildren();
+
+  }
+  function render() {
+    el('sample-results').hidden = true;
+
+    result = null;
+    if (!data || select.value === '') {
+      status.textContent = 'Choose the column that contains your selling SKU.';
+      return;
+    }
+    const mapping = Object.fromEntries(Object.entries(optional).map(([key, field]) => [key, Number(field.value)]));
+    try {
+      result = diagnose(data, Number(select.value), mapping);
+    } catch (error) {
+      status.textContent = error.message;
+      return;
+    }
+    status.textContent = isExample ? 'Fictional example loaded.' : 'Report ready.';
+    el('report-heading').textContent = isExample ? 'Fictional example report' : 'Your sample report';
+    el('finding-count').textContent = summary(result);
+    el('checks-run').textContent = result.checks.map(key => checkLabels[key]).join(' · ');
+    const skipped = Object.keys(checkLabels).filter(k => !result.checks.includes(k));
+    el('skipped-checks').textContent = skipped.length ? 'Skipped for this file: ' + skipped.map(key => checkLabels[key]).join(' · ') + '.' : 'All five checks ran.';
+    if ((mapping.card >= 0) !== (mapping.target >= 0)) {
+      el('skipped-checks').textContent += ' Choose both part-number columns to run the card comparison.';
+    }
+    const items = result.items.map(x => {
+      const li = document.createElement('li'), strong = document.createElement('strong');
+      strong.textContent = 'Record ' + x.record + ' · ' + x.reason;
+      li.append(strong, document.createTextNode(' — ' + x.action));
+      return li;
+    });
+    el('findings').replaceChildren(...items);
+    el('sample-results').hidden = false;
+  }
+  function loadText(text, fictional = false) {
+    data = parseCatalog(text, 25);
+    isExample = fictional;
+    for (const [key, field] of Object.entries({sku: select, ...optional})) {
+      const required = key === 'sku';
+      const match = column(data.headers, key);
+      field.replaceChildren();
+      if (match === ambiguousColumn) {
+        field.add(new Option('Multiple matches — choose a column', String(ambiguousColumn)));
+        if (!required) el('optional-mapping').open = true;
+      }
+      if (!required || match !== ambiguousColumn) {
+        field.add(new Option(required ? 'Select your SKU column' : 'Skip this field', required ? '' : '-1'));
+      }
+      data.headers.forEach((heading, i) => field.add(new Option(heading, String(i))));
+      if (match >= 0) field.value = String(match);
+    }
+    el('column-mapping').hidden = false;
+    render();
+  }
+  input.addEventListener('change', async () => {
+    reset();
+    const file = input.files[0], current = revision;
+    if (!file) return;
+    try {
+      if (file.size > 512 * 1024) throw new Error('Use a sample of 512 KiB or less.');
+      const bytes = await file.arrayBuffer();
+      if (current !== revision) return;
+      let text;
+      try { text = new TextDecoder('utf-8', {fatal:true}).decode(bytes); }
+      catch { throw new Error('Export a UTF-8 CSV and try again.'); }
+      loadText(text);
+    } catch (error) { if (current === revision) status.textContent = error.message; }
+  });
+  for (const field of [select, ...Object.values(optional)]) field.addEventListener('change', render);
+  el('clear-sample').addEventListener('click', () => { reset(); input.value = ''; input.focus(); });
+  el('try-example').addEventListener('click', () => {
+    reset(); input.value = '';
+    loadText('sku,uom,spec_url,card_mpn,destination_mpn\n001,EA,https://example.com/valve.pdf,V-10,V-10\n002,,spec.pdf,V-20,V-25\n002,PK,https://example.com/elbow.pdf,E-30,E-30', true);
+  });
+  function download(content, type, filename) {
+    const url = URL.createObjectURL(new Blob([content], {type}));
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    link.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+  el('download-report').addEventListener('click', () => {
+    if (!result) return;
+    download(formatReport(result, isExample), 'text/plain;charset=utf-8',
+      isExample ? 'HWC-fictional-25-SKU-example.txt' : 'HWC-25-SKU-diagnostic.txt');
+  });
+  el('download-review').addEventListener('click', () => {
+    if (!result) return;
+    const mapping = Object.fromEntries(Object.entries(optional).map(([key, field]) => [key, Number(field.value)]));
+    download(formatReviewCsv(result, data, Number(select.value), mapping), 'text/csv;charset=utf-8',
+      isExample ? 'HWC-fictional-25-SKU-review.csv' : 'HWC-25-SKU-review.csv');
+  });
+  window.addEventListener('pagehide', () => { reset(); input.value = ''; });
+}
+startFreeDiagnostic();
+</script>
+</body></html>
