@@ -33,6 +33,14 @@ python3 examples/znode-bundle-associations/preflight.py --proposed my-proposed.c
 
 You can also supply separate UTF-8 files with `--products` and `--bom`. Use the example headers. The reference product file needs unique SKUs, and the approved bill needs a unique parent/child pair per row. Use the `BundleProduct` and `SimpleProduct` product type codes shown in the example. Keep one SKU namespace and use the same kit revision. A missing SKU means the supplied snapshot did not establish the relationship. The component might already exist in a larger catalog.
 
+## Compare component units
+
+When the source files state a unit, include the kit owner's unit column in the bill and the import's unit column in the proposal. For example, use `ApprovedUOM` in the bill and `ProposedUOM` in the proposal. Two cases of twelve and two individual pieces have the same numeric quantity. The checker flags the different units for the kit owner to reconcile.
+
+Each file can use `UOM`, `Unit`, `Units`, `UnitOfMeasure`, `ComponentUOM` or `QuantityUnit`. The bill can also use `ApprovedUnit` or `ApprovedUnitOfMeasure`, and the proposal can use `ProposedUnit` or `ProposedUnitOfMeasure`. Case, spacing and underscores in those headings are interchangeable. Choose one unit column per file. Unit values are case-sensitive because `mW` and `MW` can be different units. Surrounding whitespace is ignored for comparison.
+
+If either file supplies a unit column, the report appends `proposed_uom` and `approved_uom` with the original source values. Missing or different units on a linked pair require review. The checker leaves quantities in their supplied units and makes no conversions. Files without unit columns retain the original report headings. A match then establishes the supplied IDs and numeric quantity only.
+
 ## What the check covers
 
 Znode V10 documents one Product Association Import row per relationship. Both SKUs must exist. The file includes display order and a default indicator, and bundled products require component quantity. Review the current template exported from your own environment. [Znode V10 bulk import documentation, Product Association Import](https://support.znode.com/support/solutions/articles/43000757074-bulk-importing-and-updating-data)
