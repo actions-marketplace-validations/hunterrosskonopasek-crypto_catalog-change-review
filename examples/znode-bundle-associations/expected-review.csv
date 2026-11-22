@@ -1,0 +1,9 @@
+record,ParentSku,ChildSKU,proposed_quantity,approved_quantity,decision,reason
+1,KIT-710,PIN-002,2,2,MATCH,Matches supplied references
+2,KIT-710,GSK-004,2,4,REVIEW,Proposed quantity differs from approved bill of materials
+3,KIT-710,00017,1,1,MATCH,Matches supplied references
+4,KIT-710,BRK-030,,3,REVIEW,Missing bundle component quantity
+5,KIT-710,17,1,,REVIEW,Child SKU absent from supplied product snapshot | Pair absent from supplied approved bill of materials
+6,KIT-710,CLP-100,1,,REVIEW,Pair absent from supplied approved bill of materials
+7,KIT-720,CLP-100,1,1,REVIEW,Parent/child pair occurs more than once in proposal
+8,KIT-720,CLP-100,1,1,REVIEW,Parent/child pair occurs more than once in proposal
