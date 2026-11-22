@@ -4,6 +4,8 @@ A university buyer orders 400 empty vials. Both catalog versions quote $24 per b
 
 JAGGAER asks suppliers in its Science Catalog to offer scientific products, have 10,000 SKUs or fewer, keep product and pricing information current, and honor the prices they list. This independent example uses fictional items, prices and agreements. [JAGGAER Science Catalog supplier requirements](https://www.jaggaer.com/science-catalog)
 
+STEMCELL Technologies describes quarterly price-file submissions for its hosted catalogs. If your institution also receives periodic files, keep the last approved export and review the proposed file against it before the next upload. [STEMCELL’s static-file workflow](https://www.stemcell.com/eprocurement-solutions-for-labs)
+
 ## Compare the supplier exports
 
 Read [the approved catalog](approved.csv), [the proposed catalog](proposed.csv) and [the applicable price terms](price-terms.csv) together. Each price is in USD for one order unit. EA means each, BX means box and CS means case. The pack count is the total number of individual items per order unit. Assume the same buyer, supplier, product, currency and freight terms across both exports.
