@@ -4,6 +4,16 @@ A distributor sells labels individually and in cartons. It maps a single label t
 
 **Buying 120 labels as sets would cost $300 instead of $150.** Five approved sets × $30 cover 120 labels. The proposed conversion requires ten sets × $30 for the same 120. This calculation assumes the same effective price list, no intervening tier or promotion, and a buyer who selects sets. Oro prices each unit separately. It does not turn an order for 120 individual labels into an order for sets. [Oro product units and pricing](https://doc.oroinc.com/user/back-office/products/products/product-units/)
 
+## Implementation partner handoff
+
+Have a distributor migration with a product file due for import? Introduce Hunter to the catalog owner and the person approving the import. This note can be forwarded as written.
+
+> Would a second review of one product family help before your next import? Hunter & Co. Workflow Consulting can compare your proposed catalog with approved source data. The prepaid pilot is $750 for up to 500 authorized SKUs. You receive an editable list of findings and five worked examples with the supporting evidence. Your implementation team decides what to import. To scope it, send Hunter the product family, approximate SKU count and planned import date. Please send only those details in the introduction. [Email Hunter](mailto:hunter@hunterworkflowconsulting.com?subject=Distributor%20catalog%20pilot%20introduction).
+
+**What to have ready.** Once the data owner approves sharing and any required confidentiality agreement is in place, identify the approved supplier reference and the proposed export. For a pricing question, also identify the order unit, applicable price list and quantity tier. HWC records the conflicting values, links the supporting evidence and flags missing evidence for the catalog owner.
+
+[See the $750 pilot scope](https://hunterworkflowconsulting.com/data-audits?utm_source=github&utm_medium=partner_handoff&utm_campaign=oro_product_unit_review#catalog) · [See five fictional review decisions below](#reproduce-the-comparison)
+
 ## Reproduce the comparison
 
 The [approved units](approved-units.csv) and [proposed units](proposed-units.csv) are five fictional products projected onto the unit fields in Oro’s product CSV template. The [price-list extract](price-list.csv) uses the separate price-list headers and stays fixed in this exercise. These are review inputs. For a real import, obtain the target instance’s full template and use Oro’s **Validate** step. [Product import template](https://doc.oroinc.com/user/back-office/products/products/import-products/) · [Price-list import template](https://doc.oroinc.com/user/back-office/sales/price-lists/import/)
