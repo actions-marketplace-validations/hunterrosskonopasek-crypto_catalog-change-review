@@ -20,6 +20,8 @@ Preparing a WooCommerce import? [Run a six-row variation and duplicate-SKU examp
 
 Manufacturers can [compare the same part across up to three distributor exports](https://hunterworkflowconsulting.com/manufacturer-channel-comparison?utm_source=github&utm_medium=readme&utm_campaign=manufacturer_channel). For a plumbing feed, try the six-row flow-rating example. At 60 psi, 1.5 US gallons per minute equals 5.678117676 liters per minute. A listing rounded to 5.7 gets a precision check. A listing rated at 20 psi goes back to the reviewer for comparable evidence. The tool also exports missing parts and field conflicts. A [$3,000 managed review](https://hunterworkflowconsulting.com/manufacturer-channel-comparison#managed) adds source review, a correction list for each authorized channel and one recheck.
 
+[Trace a pack mismatch from supplier to merchant to channel](examples/source-to-channel-feed/README.md). Five fictional SKUs show when to ask the catalog owner or the feed team for evidence, including a channel correction that masks a merchant discrepancy.
+
 ## Try the example
 
 [Teach a 25-minute, two-CSV verification exercise](teaching/two-csv-check/README.md). Learners can use a spreadsheet or paper to trace a pack change, a repeated identifier and a missing value. The facilitator key includes the source records and the Python results.
