@@ -39,7 +39,10 @@ def read_snapshot(path, key, fields):
     return groups, blanks
 
 
-def compare(before, after, key="sku", fields=("selling_unit", "pack_qty")):
+def compare(before, after, key="sku", fields=("selling_unit", "pack_qty"), *,
+            review_out=None, prior_review=None):
+    if prior_review is not None and review_out is None:
+        raise ValueError("--prior-review requires a new --review-out file.")
     if not fields or len(set((key, *fields))) != 1 + len(fields):
         raise ValueError("Choose one key and distinct fields other than the key.")
     left, left_blanks = read_snapshot(before, key, fields)
@@ -67,12 +70,16 @@ def compare(before, after, key="sku", fields=("selling_unit", "pack_qty")):
         elif old[0].fields != new[0].fields:
             changed = [field for i, field in enumerate(fields) if old[0].fields[i] != new[0].fields[i]]
             add("changed", old_nums, new_nums, changed)
-    return {
+    report = {
         "before_records": sum(map(len, left.values())) + len(left_blanks),
         "after_records": sum(map(len, right.values())) + len(right_blanks),
         "counts": dict(sorted(Counter(f["reason"] for f in findings).items())),
         "findings": findings,
     }
+    if review_out is not None:
+        from release_review import write_review
+        write_review(review_out, prior_review, key, fields, left, right, left_blanks, report)
+    return report
 
 
 def main(argv=None):
@@ -82,9 +89,12 @@ def main(argv=None):
     parser.add_argument("--key", default="sku")
     parser.add_argument("--field", action="append", help="Repeat for each compared column.")
     parser.add_argument("--fail-on-change", action="store_true", help="Exit with status 1 for any finding.")
+    parser.add_argument("--review-out", type=Path, help="Write a new private, editable release review JSON file.")
+    parser.add_argument("--prior-review", type=Path, help="Carry matching decisions from an earlier --review-out file.")
     args = parser.parse_args(argv)
     try:
-        report = compare(args.before, args.after, args.key, args.field or ("selling_unit", "pack_qty"))
+        report = compare(args.before, args.after, args.key, args.field or ("selling_unit", "pack_qty"),
+                         review_out=args.review_out, prior_review=args.prior_review)
     except (OSError, UnicodeError, ValueError, csv.Error) as exc:
         message = str(exc) if isinstance(exc, ValueError) and not isinstance(exc, UnicodeError) else "Could not read a valid UTF-8 CSV snapshot."
         print(message, file=sys.stderr)

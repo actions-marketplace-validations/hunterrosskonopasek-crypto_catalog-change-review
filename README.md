@@ -56,6 +56,27 @@ python3 review.py approved.csv proposed.csv --key item_id --field unit --field p
 
 The defaults are `sku`, `selling_unit`, and `pack_qty`. Names are case-sensitive. SKU matching preserves case, spaces and leading zeros. Quoted commas and embedded newlines are supported. Record numbers count CSV records after the header, including ignored empty records. Compare complete snapshots with matching coverage. A partial export will mark omitted items as removed.
 
+## Recheck successive releases
+
+For complete proposals covering the same catalog and approved reference, keep one private review per release. The current source checkout supports these options.
+
+```sh
+python3 review.py approved.csv proposed.csv --review-out first.json
+python3 review.py approved.csv revised.csv --prior-review first.json --review-out second.json
+```
+
+In the first JSON file, edit only the `decision` string on a uniquely identified open item. Use the copy containing those notes as the next run’s prior review. Each new file records exact identifiers, selected values in the order shown under `scope.fields`, and current CSV record numbers. Store it with the authorized exports. The ordinary console report still omits identifiers and values. Choose a fresh output filename every time.
+
+| Status | What the reviewer can conclude |
+| --- | --- |
+| `new` | A unique, reviewable difference appears for the first time or after identity was uncertain. |
+| `unchanged` | The identifier, reason and selected before/after values match. The previous decision carries forward. |
+| `changed` or `reopened` | Evidence changed or a previously closed difference returned. The new decision is blank. |
+| `closed` or `still_closed` | The records now agree on the selected fields, or a formerly extra identifier is absent from both complete snapshots. The reason distinguishes these cases. |
+| `identity_unresolved` | Duplicate identifiers prevent a match, or unidentified/duplicate rows leave the disappearance of a formerly extra identifier uncertain. |
+
+Blank IDs are reported individually in `unidentified_rows` and never inherit a decision. Reordering rows is supported. A different key, field selection or approved keyed data starts a new review history. Changes outside the selected fields are outside the comparison. For a worked sequence, see the [fictional Oro unit releases](examples/orocommerce-product-units/README.md#recheck-three-fictional-releases).
+
 ## Use in GitHub Actions
 
 On a Linux runner with Python 3 and your repository already checked out, add this step. Paths point to the two snapshots in your workflow workspace.
