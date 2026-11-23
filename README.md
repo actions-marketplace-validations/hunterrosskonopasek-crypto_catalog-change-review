@@ -26,6 +26,8 @@ Manufacturers can [compare the same part across up to three distributor exports]
 
 ## Try the example
 
+WordPress agencies can [open the catalog checker inside WordPress Playground or install the plugin](wordpress/README.md) to review a CSV before import.
+
 [Teach a 25-minute, two-CSV verification exercise](teaching/two-csv-check/README.md). Learners can use a spreadsheet or paper to trace a pack change, a repeated identifier and a missing value. The facilitator key includes the source records and the Python results.
 
 [Download the v1.0.1 source ZIP](https://github.com/hunterrosskonopasek-crypto/catalog-change-review/archive/refs/tags/v1.0.1.zip), unzip it and open the folder that contains `review.py`. Run the example from that folder.
