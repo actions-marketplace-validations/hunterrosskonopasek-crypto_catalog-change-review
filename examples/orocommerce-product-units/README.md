@@ -50,3 +50,28 @@ The first report matches [the checked output](expected-findings.json). Record nu
 For a customer review, verify the approved packaging revision, account, website, effective price list, currency, tiers and exact order unit. The CLI compares the product fields you pass. It does not look up the live store, compute prices or approve changes. The example has one additional unit per SKU. When source products have several, match them by unit code across exports before interpreting a difference in an indexed column such as `additionalUnitPrecisions:0:conversionRate`.
 
 For one distributor, HWC’s $750 managed pilot reviews an authorized category of up to 500 SKUs and returns an editable findings file plus five worked examples with source evidence. [Scope the $750 pilot](https://hunterworkflowconsulting.com/data-audits?utm_source=github&utm_medium=worked_example&utm_campaign=oro_product_unit_review#catalog)
+
+## Recheck three fictional releases
+
+Use the approved units file as the reference throughout. These commands select the same four fields across all three proposals. Each JSON file contains the SKUs and values under review.
+
+```sh
+sample=examples/orocommerce-product-units
+track_units() {
+  proposal=$1
+  shift
+  python3 review.py "$sample/approved-units.csv" "$sample/$proposal" \
+    --field 'primaryUnitPrecision.sell' --field 'additionalUnitPrecisions:0:precision' \
+    --field 'additionalUnitPrecisions:0:conversionRate' --field 'additionalUnitPrecisions:0:sell' "$@"
+}
+track_units proposed-units.csv --review-out first.json
+```
+
+In `first.json`, set RING-08’s `decision` to `Keep ten per set per packing revision A`. Then run
+
+```sh
+track_units reviewed-units.csv --prior-review first.json --review-out second.json
+track_units next-proposal-units.csv --prior-review second.json --review-out third.json
+```
+
+In the second proposal, LABEL-24, CLIP-12 and CAP-06 match the approved data again. RING-08 still proposes ten per set, so the prior note carries forward. In the [third proposal](next-proposal-units.csv), RING-08 proposes eleven. Its earlier note appears in `previous_decision` and the new decision is blank. CLIP-12 reopens when the item sell flag returns to zero. TRAY-04 is a new finding because its proposed set now contains five items. The earlier question about its effective set price requires separate price evidence.

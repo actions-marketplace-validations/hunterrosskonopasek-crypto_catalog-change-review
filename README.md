@@ -14,7 +14,9 @@ Have a small catalog sample? [Check up to 25 SKUs in your browser](https://hunte
 
 Working with an Akeneo import? [Check incoming identifiers against an existing PIM export](https://hunterworkflowconsulting.com/akeneo-identifier-check?utm_source=github&utm_medium=readme&utm_campaign=catalog_change_review). Both files stay in your browser. The six-row example shows how a case change can update an existing product.
 
-Preparing a Znode bundle import? [Run an eight-row component check](examples/znode-bundle-associations/README.md) to see which quantities match the approved bill of materials. The fictional kit needs four gaskets, but the proposed relationship lists two.
+Check a distributor’s seasonal price break with [two real winter salt SKUs and a fictional staged order](examples/winter-catalog-check/README.md). At 49 bags, carrying the previous tier forward adds £13.72 before VAT.
+
+Preparing a distributor kit import? [Try the eight-row kit check in your browser](https://hunterworkflowconsulting.com/bundle-bom-review?utm_source=github&utm_medium=readme&utm_campaign=distributor_kit_partner) or [run the Znode example offline](examples/znode-bundle-associations/README.md). The fictional kit calls for four gaskets, but the proposed file lists two. Implementation partners can [ask HWC to review an upcoming distributor release](https://form.jotform.com/263065301224041?q4_textarea2=GitHub%20Catalog%20Change%20Review%20%E2%80%94%20distributor%20kit%20release.%20I%20would%20like%20to%20discuss%20the%20%24750%20prepaid%20pilot%20for%20one%20authorized%20product%20family.%20Release%20or%20kit%20family%3A%20%0AApproximate%20SKU%20count%3A%20%0APlanned%20import%20date%3A%20%0AWho%20reviews%20the%20findings%20%28role%29%3A%20). The $750 prepaid pilot covers one authorized product family of up to 500 SKUs. A family or release name, approximate SKU count, import date and reviewer’s role are enough to discuss scope. Keep customer names and files private at this stage.
 
 Preparing a WooCommerce import? [Run a six-row variation and duplicate-SKU example](examples/woocommerce-import/README.md). Compare two fictional exports, then inspect the selling-unit mismatch in the [worked $750 migration QA pilot](https://hunterworkflowconsulting.com/shopify-plus-pim-agency-partner-program?utm_source=github&utm_medium=marketplace&utm_campaign=woocommerce_import_qa#woocommerce-migration-qa). HWC can review one authorized product family before the agency imports it.
 
@@ -23,6 +25,8 @@ Manufacturers can [compare the same part across up to three distributor exports]
 [Trace a pack mismatch from supplier to merchant to channel](examples/source-to-channel-feed/README.md). Five fictional SKUs show when to ask the catalog owner or the feed team for evidence, including a channel correction that masks a merchant discrepancy.
 
 ## Try the example
+
+WordPress agencies can [open the catalog checker inside WordPress Playground or install the plugin](wordpress/README.md) to review a CSV before import.
 
 [Teach a 25-minute, two-CSV verification exercise](teaching/two-csv-check/README.md). Learners can use a spreadsheet or paper to trace a pack change, a repeated identifier and a missing value. The facilitator key includes the source records and the Python results.
 
@@ -55,6 +59,27 @@ python3 review.py approved.csv proposed.csv --key item_id --field unit --field p
 ```
 
 The defaults are `sku`, `selling_unit`, and `pack_qty`. Names are case-sensitive. SKU matching preserves case, spaces and leading zeros. Quoted commas and embedded newlines are supported. Record numbers count CSV records after the header, including ignored empty records. Compare complete snapshots with matching coverage. A partial export will mark omitted items as removed.
+
+## Recheck successive releases
+
+For complete proposals covering the same catalog and approved reference, keep one private review per release. The current source checkout supports these options.
+
+```sh
+python3 review.py approved.csv proposed.csv --review-out first.json
+python3 review.py approved.csv revised.csv --prior-review first.json --review-out second.json
+```
+
+In the first JSON file, edit only the `decision` string on a uniquely identified open item. Use the copy containing those notes as the next run’s prior review. Each new file records exact identifiers, selected values in the order shown under `scope.fields`, and current CSV record numbers. Store it with the authorized exports. The ordinary console report still omits identifiers and values. Choose a fresh output filename every time.
+
+| Status | What the reviewer can conclude |
+| --- | --- |
+| `new` | A unique, reviewable difference appears for the first time or after identity was uncertain. |
+| `unchanged` | The identifier, reason and selected before/after values match. The previous decision carries forward. |
+| `changed` or `reopened` | Evidence changed or a previously closed difference returned. The new decision is blank. |
+| `closed` or `still_closed` | The records now agree on the selected fields, or a formerly extra identifier is absent from both complete snapshots. The reason distinguishes these cases. |
+| `identity_unresolved` | Duplicate identifiers prevent a match, or unidentified/duplicate rows leave the disappearance of a formerly extra identifier uncertain. |
+
+Blank IDs are reported individually in `unidentified_rows` and never inherit a decision. Reordering rows is supported. A different key, field selection or approved keyed data starts a new review history. Changes outside the selected fields are outside the comparison. For a worked sequence, see the [fictional Oro unit releases](examples/orocommerce-product-units/README.md#recheck-three-fictional-releases).
 
 ## Use in GitHub Actions
 
