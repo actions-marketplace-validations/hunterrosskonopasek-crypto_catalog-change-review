@@ -24,7 +24,7 @@ Manufacturers can [compare the same part across up to three distributor exports]
 
 [Trace a pack mismatch from supplier to merchant to channel](examples/source-to-channel-feed/README.md). Five fictional SKUs show when to ask the catalog owner or the feed team for evidence, including a channel correction that masks a merchant discrepancy.
 
-[Reproduce a price import in SQLite](examples/price-import-key/README.md). Four valid price rows share a SKU. The example shows why a three-carton order needs the selling unit and effective date to return $96.00.
+[Review a price change when four rows share a SKU](examples/price-import-key/README.md). Compare the exports by price list, part number, selling unit and effective date to find the March carton priced as one clip. The SQLite example shows the effect on a three-carton order.
 
 ## Try the example
 
@@ -79,9 +79,11 @@ In the first JSON file, edit only the `decision` string on a uniquely identified
 | `unchanged` | The identifier, reason and selected before/after values match. The previous decision carries forward. |
 | `changed` or `reopened` | Evidence changed or a previously closed difference returned. The new decision is blank. |
 | `closed` or `still_closed` | The records now agree on the selected fields, or a formerly extra identifier is absent from both complete snapshots. The reason distinguishes these cases. |
-| `identity_unresolved` | Duplicate identifiers prevent a match, or unidentified/duplicate rows leave the disappearance of a formerly extra identifier uncertain. |
+| `identity_unresolved` | A duplicate key prevents a match, an incomplete key could explain an apparent addition or removal, or unidentified rows leave an earlier discrepancy uncertain. Consult the source before carrying a decision forward. |
 
 Blank IDs are reported individually in `unidentified_rows` and never inherit a decision. Reordering rows is supported. A different key, field selection or approved keyed data starts a new review history. Changes outside the selected fields are outside the comparison. For a worked sequence, see the [fictional Oro unit releases](examples/orocommerce-product-units/README.md#recheck-three-fictional-releases).
+
+For price lists with several records per SKU, repeat `--key` in the order agreed with the catalog owner. Choose stable identifiers. A change to a key component appears as a removed record and an added record. A blank component or repeated full key needs review. The private review stores each compound identifier as a JSON array and carries a decision only when the full identifier and selected evidence still match. [Worked four-column comparison](examples/price-import-key/README.md#compare-two-price-exports)
 
 ## Use in GitHub Actions
 
