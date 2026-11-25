@@ -7,6 +7,15 @@ A distributor sells cable clip `HWC-CLIP-20` individually and in cartons of 20. 
 | February 1, 2027 | $30.00 | $1.65 |
 | March 1, 2027 | $32.00 | $1.80 |
 
+## How one carton price can underbill $4,077
+
+Suppose 45 customers each order three cartons at the March price in this example. Each order should bill $96.00. A part-number-only lookup that selects the $1.80 each price bills $5.40. That leaves $90.60 per order, or **$4,077 across 45 orders**, unbilled. The volume is hypothetical. This calculation measures invoice value and includes no retailer penalty or chargeback.
+
+Before the next import, ask the release owner to choose one SKU sold both ways. Build a test order in the buyer’s usual customer group, select the carton explicitly, and compare the extended price with the approved price list for the order date. Repeat for one each. Record the source row and both totals so the reviewer can reproduce the result. Multiplying the each price by 20 would give $36.00 per carton here. The approved carton price is $32.00.
+
+- [Screen up to 25 source rows in the free browser checker](https://hunterworkflowconsulting.com/free-25-sku-diagnostic?utm_source=github&utm_medium=field_note&utm_campaign=carton_price). The CSV stays on your device. Its unit and identifier flags can help you choose rows for the price test.
+- [Install HWC Catalog Change Review from GitHub Marketplace](https://github.com/marketplace/actions/hwc-catalog-change-review). For the four-column price comparison below, use the [tested revision and installation instructions](https://github.com/hunterrosskonopasek-crypto/catalog-change-review/blob/60f80401284794a284ccb98dd9f4984afd6e8ec1/README.md#use-in-github-actions).
+
 ## Reproduce the import
 
 First, use the two exports to locate the difference a reviewer would have to explain.
