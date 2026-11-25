@@ -6,7 +6,7 @@ Catch a case-pack change before a distributor imports its next feed. This tool c
 
 [Request scope and availability for the $1,250 white-label QA trial](https://form.jotform.com/263065301224041?q4_textarea2=I%20found%20HWC%20through%20the%20GitHub%20catalog-change-review%20tool.%20I%20would%20like%20to%20discuss%20the%20%241%2C250%20white-label%20catalog%20QA%20trial%20for%20one%20authorized%20merchant%20feed%2C%20up%20to%20100%20source%20rows%20and%2012%20manual%20cases.%20Product%20family%2C%20approximate%20row%20count%20and%20desired%20review%20date%3A%20). It covers one authorized merchant feed, one pack-count field, up to 100 source rows, 12 manual cases and one correction round. The form asks for the product family, approximate row count and review date. Share the export once both parties agree on scope and data sharing.
 
-Have a small catalog sample? [Check up to 25 SKUs in your browser](https://hunterworkflowconsulting.com/free-25-sku-diagnostic?utm_source=github&utm_medium=readme&utm_campaign=catalog_change_review) to flag specification links, selling units and related-card model numbers for review. The CSV stays on your device. To use the same checks without an internet connection, [download the single-file offline edition (ZIP)](https://github.com/hunterrosskonopasek-crypto/catalog-change-review/raw/refs/heads/main/free-tools/25-sku-diagnostic/HWC-Free-25-SKU-Diagnostic.zip) and open the extracted HTML in your browser. [Offline instructions and checksums](free-tools/25-sku-diagnostic/README.md). For a larger export, the [$750 managed pilot](https://hunterworkflowconsulting.com/data-audits?utm_source=github&utm_medium=readme&utm_campaign=catalog_change_review#catalog) covers one product category and up to 500 SKUs. Your catalog owner receives an editable findings file and five worked examples with source evidence.
+Have a small catalog sample? [Check up to 25 SKUs in your browser](https://hunterworkflowconsulting.com/free-25-sku-diagnostic?utm_source=github&utm_medium=readme&utm_campaign=catalog_change_review) to flag specification links, selling units and related-card model numbers for review. The CSV stays on your device. To use the same checks without an internet connection, [download the single-file offline edition (ZIP)](https://github.com/hunterrosskonopasek-crypto/catalog-change-review/raw/refs/heads/main/free-tools/25-sku-diagnostic/HWC-Free-25-SKU-Diagnostic.zip) and open the extracted HTML in your browser. [Offline instructions and checksums](free-tools/25-sku-diagnostic/README.md). For a larger export, the [$750 managed pilot](https://hunterworkflowconsulting.com/data-audits?utm_source=github&utm_medium=readme&utm_campaign=catalog_change_review#catalog) covers one product category and up to 500 source rows. If one SKU has separate each and carton price rows, both count. Your catalog owner receives an editable findings file and five worked examples with source evidence.
 
 [Audit related-product card descriptions](offers/related-product-card-audit.md) when a card points to one model and its teaser names another. One $2,500 payment covers 12 months of unlimited local runs for one licensed storefront. Renewal requires a new order.
 
@@ -16,13 +16,15 @@ Working with an Akeneo import? [Check incoming identifiers against an existing P
 
 Check a distributor’s seasonal price break with [two real winter salt SKUs and a fictional staged order](examples/winter-catalog-check/README.md). At 49 bags, carrying the previous tier forward adds £13.72 before VAT.
 
-Preparing a distributor kit import? [Try the eight-row kit check in your browser](https://hunterworkflowconsulting.com/bundle-bom-review?utm_source=github&utm_medium=readme&utm_campaign=distributor_kit_partner) or [run the Znode example offline](examples/znode-bundle-associations/README.md). The fictional kit calls for four gaskets, but the proposed file lists two. Implementation partners can [ask HWC to review an upcoming distributor release](https://form.jotform.com/263065301224041?q4_textarea2=GitHub%20Catalog%20Change%20Review%20%E2%80%94%20distributor%20kit%20release.%20I%20would%20like%20to%20discuss%20the%20%24750%20prepaid%20pilot%20for%20one%20authorized%20product%20family.%20Release%20or%20kit%20family%3A%20%0AApproximate%20SKU%20count%3A%20%0APlanned%20import%20date%3A%20%0AWho%20reviews%20the%20findings%20%28role%29%3A%20). The $750 prepaid pilot covers one authorized product family of up to 500 SKUs. A family or release name, approximate SKU count, import date and reviewer’s role are enough to discuss scope. Keep customer names and files private at this stage.
+Preparing a distributor kit import? [Try the eight-row kit check in your browser](https://hunterworkflowconsulting.com/bundle-bom-review?utm_source=github&utm_medium=readme&utm_campaign=distributor_kit_partner) or [run the Znode example offline](examples/znode-bundle-associations/README.md). The fictional kit calls for four gaskets, but the proposed file lists two. Implementation partners can [ask HWC to review an upcoming distributor release](https://form.jotform.com/263065301224041?q4_textarea2=GitHub%20Catalog%20Change%20Review%20%E2%80%94%20distributor%20kit%20release.%20I%20would%20like%20to%20discuss%20the%20%24750%20prepaid%20pilot%20for%20one%20authorized%20product%20family.%20Release%20or%20kit%20family%3A%20%0AApproximate%20source%20row%20count%3A%20%0APlanned%20import%20date%3A%20%0AWho%20reviews%20the%20findings%20%28role%29%3A%20). The $750 prepaid pilot covers one authorized product family of up to 500 source rows. A family or release name, approximate source row count, import date and reviewer’s role are enough to discuss scope. Keep customer names and files private at this stage.
 
 Preparing a WooCommerce import? [Run a six-row variation and duplicate-SKU example](examples/woocommerce-import/README.md). Compare two fictional exports, then inspect the selling-unit mismatch in the [worked $750 migration QA pilot](https://hunterworkflowconsulting.com/shopify-plus-pim-agency-partner-program?utm_source=github&utm_medium=marketplace&utm_campaign=woocommerce_import_qa#woocommerce-migration-qa). HWC can review one authorized product family before the agency imports it.
 
 Manufacturers can [compare the same part across up to three distributor exports](https://hunterworkflowconsulting.com/manufacturer-channel-comparison?utm_source=github&utm_medium=readme&utm_campaign=manufacturer_channel). For a plumbing feed, try the six-row flow-rating example. At 60 psi, 1.5 US gallons per minute equals 5.678117676 liters per minute. A listing rounded to 5.7 gets a precision check. A listing rated at 20 psi goes back to the reviewer for comparable evidence. The tool also exports missing parts and field conflicts. A [$3,000 managed review](https://hunterworkflowconsulting.com/manufacturer-channel-comparison#managed) adds source review, a correction list for each authorized channel and one recheck.
 
 [Trace a pack mismatch from supplier to merchant to channel](examples/source-to-channel-feed/README.md). Five fictional SKUs show when to ask the catalog owner or the feed team for evidence, including a channel correction that masks a merchant discrepancy.
+
+[Review a price change when four rows share a SKU](examples/price-import-key/README.md). Compare the exports by price list, part number, selling unit and effective date to find the March carton priced as one clip. The SQLite example shows the effect on a three-carton order.
 
 ## Try the example
 
@@ -77,9 +79,11 @@ In the first JSON file, edit only the `decision` string on a uniquely identified
 | `unchanged` | The identifier, reason and selected before/after values match. The previous decision carries forward. |
 | `changed` or `reopened` | Evidence changed or a previously closed difference returned. The new decision is blank. |
 | `closed` or `still_closed` | The records now agree on the selected fields, or a formerly extra identifier is absent from both complete snapshots. The reason distinguishes these cases. |
-| `identity_unresolved` | Duplicate identifiers prevent a match, or unidentified/duplicate rows leave the disappearance of a formerly extra identifier uncertain. |
+| `identity_unresolved` | A duplicate key prevents a match, an incomplete key could explain an apparent addition or removal, or unidentified rows leave an earlier discrepancy uncertain. Consult the source before carrying a decision forward. |
 
 Blank IDs are reported individually in `unidentified_rows` and never inherit a decision. Reordering rows is supported. A different key, field selection or approved keyed data starts a new review history. Changes outside the selected fields are outside the comparison. For a worked sequence, see the [fictional Oro unit releases](examples/orocommerce-product-units/README.md#recheck-three-fictional-releases).
+
+For price lists with several records per SKU, repeat `--key` in the order agreed with the catalog owner. Choose stable identifiers. A change to a key component appears as a removed record and an added record. A blank component or repeated full key needs review. The private review stores each compound identifier as a JSON array and carries a decision only when the full identifier and selected evidence still match. [Worked four-column comparison](examples/price-import-key/README.md#compare-two-price-exports)
 
 ## Use in GitHub Actions
 
@@ -94,6 +98,22 @@ On a Linux runner with Python 3 and your repository already checked out, add thi
 ```
 
 The action reports JSON and fails the step on any finding so a reviewer can decide whether to proceed. The local CLI exits successfully with findings unless you add `--fail-on-change`. Exit status 2 indicates invalid input.
+
+For a distributor price export with multiple prices per SKU, use the revision below and the key fields agreed with the catalog owner. This example checks the price per selling unit and retains the original CSV record numbers.
+
+```yaml
+- name: Check distributor price changes
+  uses: hunterrosskonopasek-crypto/catalog-change-review@2f2efd9ca0087186dab89a222c606ba5719d7e90
+  with:
+    before: catalog/approved-prices.csv
+    after: catalog/proposed-prices.csv
+    key-columns: |
+      price_list
+      part_number
+      selling_unit
+      effective_date
+    compare-columns: usd_per_selling_unit
+```
 
 Run the test suite with `python3 -m unittest -v`.
 
